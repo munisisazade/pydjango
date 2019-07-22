@@ -16,6 +16,7 @@ setuptools.setup(
     entry_points={'console_scripts': [
         'create_django = pydjango.core.management:execute_from_command_line',
     ]},
+    platforms=['any'],
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
