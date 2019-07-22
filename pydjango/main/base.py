@@ -44,7 +44,7 @@ class Command(object):
             result.append(line)
         errcode = process.returncode
         for line in result:
-            sys.stdout.write(line)
+            sys.stdout.write(line.decode("utf-8"))
         if errcode is not None:
             raise Exception('cmd %s failed, see above for details', commands)
 
