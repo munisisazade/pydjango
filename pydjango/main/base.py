@@ -14,7 +14,7 @@ class Command(object):
             Initialize folder name
         """
         self.folder_name = folder_name
-        self.path = "%s/" % folder_name
+        self.path = "%s/" % folder_name if os_type != "Windows" else "%s\\" % folder_name
 
     def run(self):
         """
@@ -27,7 +27,7 @@ class Command(object):
             sys.stdout.write("First install VirtualEnv for windows...\n")
             self.run_win_cmd("pip install virtualenv virtualenvwrapper-win")
             sys.stdout.write("Creating virtualenv for python3...\n")
-            self.run_win_cmd("mkvirtualenv '%cd%\\" + "%s%s'" % (self.path, "venv"))
+            self.run_win_cmd('mkvirtualenv "%cd%\\' + '%s%s"' % (self.path, "venv"))
             sys.stdout.write("Activate virtualenv and install django...\n")
             self.run_win_cmd("%s%s\\Scripts\\activate.bat && pip install django" % (self.path, "venv"))
             sys.stdout.write("Create new django app \n")
