@@ -24,9 +24,19 @@ class Command(object):
         if os_type == "Linux":
             print("Linux")
         elif os_type == "Windows":
-            self.run_win_cmd("python -m venv %s%s" % (self.path, "venv"))
-            self.run_win_cmd("%s%s/Scripts/activate.bat" % (self.path, "venv"))
-            self.run_win_cmd("pip install django")
+            sys.stdout.write("First install VirtualEnv for windows....")
+            self.run_win_cmd("pip install virtualenv virtualenvwrapper-win")
+            sys.stdout.write("Creating virtualenv for python3....")
+            self.run_win_cmd("mkvirtualenv %s%s" % (self.path, "venv"))
+            sys.stdout.write("Activate virtualenv and install django..")
+            self.run_win_cmd("%s%s\\Scripts\\activate.bat && pip install django" % (self.path, "venv"))
+            sys.stdout.write("Create new django app")
+            djang_app_name = input("Django app name: ")
+            self.run_win_cmd("%s%s\\Scripts\\activate.bat && django-admin startproject %s %s" % (self.path, "venv", djang_app_name, self.path))
+            app_name = input("Application name : ")
+            self.run_win_cmd("%s%s\\Scripts\\activate.bat && python manage.py startapp %s" % (
+            self.path, "venv", app_name))
+            print("Yess !!!")
             print("Windows")
         elif os_type == "Darwin":
             print("Mac")
