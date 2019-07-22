@@ -130,8 +130,11 @@ class ManagementUtility(object):
                 else:
                     cmd = Command(self.folder_name)
                     cmd.run()
-        else:
+        elif len(options.args) > 1:
             sys.stdout.write("Note: only one argument accepted folder_name")
+            sys.stdout.write(self.main_help_text())
+            sys.exit(1)
+        else:
             sys.stdout.write(self.main_help_text())
             sys.exit(1)
 
