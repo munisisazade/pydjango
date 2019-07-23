@@ -1,0 +1,11 @@
+pgdb/
+redisdb/
+.venv/
+.idea/
+.code/
+.vscode/
+*.pyc
+*.log
+*.mo
+app/db.sqlite3
+app/media

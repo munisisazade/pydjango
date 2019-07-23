@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 from pydjango.main.detect import os_type
-
+from pydjango.conf import conf_path
 
 class Command(object):
     """
@@ -16,12 +16,14 @@ class Command(object):
         self.folder_name = folder_name
         self.path = "%s/" % folder_name if os_type != "Windows" else "%s\\" % folder_name
 
+
     def run(self):
         """
             This method start all methods
         """
         self.create_folder()
         if os_type == "Linux":
+            print("cwd", conf_path)
             print("Linux")
         elif os_type == "Windows":
             sys.stdout.write("First install VirtualEnv for windows...\n")
@@ -36,8 +38,7 @@ class Command(object):
             app_name = input("Application name : ")
             self.run_win_cmd("%s%s\\Scripts\\activate.bat && python manage.py startapp %s" % (
             self.path, "venv", app_name))
-            print("Yess !!!")
-            print("Windows")
+            self.run_win_cmd("")
         elif os_type == "Darwin":
             print("Mac")
         else:
