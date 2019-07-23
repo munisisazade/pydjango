@@ -1,7 +1,7 @@
 from functools import wraps
 
-from jinja2.asyncsupport import auto_aiter, auto_await
-from jinja2 import filters
+from .asyncsupport import auto_aiter, auto_await
+from . import filters
 
 
 async def auto_to_seq(value):

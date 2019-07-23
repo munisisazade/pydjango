@@ -14,9 +14,9 @@ import asyncio
 import inspect
 from functools import update_wrapper
 
-from jinja2.utils import concat, internalcode, Markup
-from jinja2.environment import TemplateModule
-from jinja2.runtime import LoopContextBase, _last_iteration
+from .utils import concat, internalcode, Markup
+from .environment import TemplateModule
+from .runtime import LoopContextBase, _last_iteration
 
 
 async def concat_async(async_gen):
@@ -154,15 +154,15 @@ def patch_template():
 
 
 def patch_runtime():
-    from jinja2.runtime import BlockReference, Macro
+    from .runtime import BlockReference, Macro
     BlockReference.__call__ = wrap_block_reference_call(
         BlockReference.__call__)
     Macro._invoke = wrap_macro_invoke(Macro._invoke)
 
 
 def patch_filters():
-    from jinja2.filters import FILTERS
-    from jinja2.asyncfilters import ASYNC_FILTERS
+    from .filters import FILTERS
+    from .asyncfilters import ASYNC_FILTERS
     FILTERS.update(ASYNC_FILTERS)
 
 

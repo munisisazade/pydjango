@@ -30,30 +30,30 @@ __docformat__ = 'restructuredtext en'
 __version__ = '2.11.dev'
 
 # high level interface
-from jinja2.environment import Environment, Template
+from .environment import Environment, Template
 
 # loaders
-from jinja2.loaders import BaseLoader, FileSystemLoader, PackageLoader, \
+from .loaders import BaseLoader, FileSystemLoader, PackageLoader, \
      DictLoader, FunctionLoader, PrefixLoader, ChoiceLoader, \
      ModuleLoader
 
 # bytecode caches
-from jinja2.bccache import BytecodeCache, FileSystemBytecodeCache, \
+from .bccache import BytecodeCache, FileSystemBytecodeCache, \
      MemcachedBytecodeCache
 
 # undefined types
-from jinja2.runtime import Undefined, ChainableUndefined, DebugUndefined, \
+from .runtime import Undefined, ChainableUndefined, DebugUndefined, \
      StrictUndefined, make_logging_undefined
 
 # exceptions
-from jinja2.exceptions import TemplateError, UndefinedError, \
+from .exceptions import TemplateError, UndefinedError, \
      TemplateNotFound, TemplatesNotFound, TemplateSyntaxError, \
      TemplateAssertionError, TemplateRuntimeError
 
 # decorators and public utilities
-from jinja2.filters import environmentfilter, contextfilter, \
+from .filters import environmentfilter, contextfilter, \
      evalcontextfilter
-from jinja2.utils import Markup, escape, clear_caches, \
+from .utils import Markup, escape, clear_caches, \
      environmentfunction, evalcontextfunction, contextfunction, \
      is_undefined, select_autoescape
 
@@ -68,5 +68,5 @@ __all__ = [
     'ModuleLoader', 'environmentfilter', 'contextfilter', 'Markup', 'escape',
     'environmentfunction', 'contextfunction', 'clear_caches', 'is_undefined',
     'evalcontextfilter', 'evalcontextfunction', 'make_logging_undefined',
-    'select_autoescape',
+    'select_autoescape'
 ]

@@ -14,12 +14,12 @@
 """
 import types
 import operator
-from jinja2.environment import Environment
-from jinja2.exceptions import SecurityError
-from jinja2._compat import string_types, PY2, abc
-from jinja2.utils import Markup
+from .environment import Environment
+from .exceptions import SecurityError
+from ._compat import string_types, PY2, abc
+from .utils import Markup
 
-from markupsafe import EscapeFormatter
+from pydjango.contrib.markupsafe import EscapeFormatter
 from string import Formatter
 
 
@@ -172,7 +172,7 @@ def is_internal_attribute(obj, attr):
     python objects.  This is useful if the environment method
     :meth:`~SandboxedEnvironment.is_safe_attribute` is overridden.
 
-    >>> from jinja2.sandbox import is_internal_attribute
+    >>> from .sandbox import is_internal_attribute
     >>> is_internal_attribute(str, "mro")
     True
     >>> is_internal_attribute(str, "upper")

@@ -3,6 +3,8 @@ import sys
 import subprocess
 from pydjango.main.detect import os_type
 from pydjango.conf import conf_path
+from pydjango.contrib.jinja2 import Template
+
 
 class Command(object):
     """
@@ -16,14 +18,15 @@ class Command(object):
         self.folder_name = folder_name
         self.path = "%s/" % folder_name if os_type != "Windows" else "%s\\" % folder_name
 
-
     def run(self):
         """
             This method start all methods
         """
         self.create_folder()
         if os_type == "Linux":
-            print("cwd", conf_path)
+            file = open(os.path.join(conf_path, "hello.html"))
+            tmp = Template(file.read())
+            print(tmp.render(name="Munis Isazade"))
             print("Linux")
         elif os_type == "Windows":
             sys.stdout.write("First install VirtualEnv for windows...\n")
@@ -34,10 +37,11 @@ class Command(object):
             self.run_win_cmd("%s%s\\Scripts\\activate.bat && pip install django" % (self.path, "venv"))
             sys.stdout.write("Create new django app \n")
             djang_app_name = input("Django app name: ")
-            self.run_win_cmd("%s%s\\Scripts\\activate.bat && django-admin startproject %s %s" % (self.path, "venv", djang_app_name, self.path))
+            self.run_win_cmd("%s%s\\Scripts\\activate.bat && django-admin startproject %s %s" % (
+            self.path, "venv", djang_app_name, self.path))
             app_name = input("Application name : ")
             self.run_win_cmd("%s%s\\Scripts\\activate.bat && python manage.py startapp %s" % (
-            self.path, "venv", app_name))
+                self.path, "venv", app_name))
             self.run_win_cmd("")
         elif os_type == "Darwin":
             print("Mac")
