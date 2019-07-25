@@ -2,9 +2,12 @@ import os
 import sys
 import subprocess
 from pydjango.main.detect import os_type
-from pydjango.conf import conf_path
-from pydjango.contrib.jinja2 import Template
+from jinja2 import Template
 
+try:
+    from pydjango.config import conf_path
+except:
+    conf_path = "/"
 
 class Command(object):
     """
@@ -24,9 +27,11 @@ class Command(object):
         """
         self.create_folder()
         if os_type == "Linux":
+            print(conf_path)
             file = open(os.path.join(conf_path, "hello.html"))
             tmp = Template(file.read())
             print(tmp.render(name="Munis Isazade"))
+            print(conf_path)
             print("Linux")
         elif os_type == "Windows":
             sys.stdout.write("First install VirtualEnv for windows...\n")
@@ -38,7 +43,7 @@ class Command(object):
             sys.stdout.write("Create new django app \n")
             djang_app_name = input("Django app name: ")
             self.run_win_cmd("%s%s\\Scripts\\activate.bat && django-admin startproject %s %s" % (
-            self.path, "venv", djang_app_name, self.path))
+                self.path, "venv", djang_app_name, self.path))
             app_name = input("Application name : ")
             self.run_win_cmd("%s%s\\Scripts\\activate.bat && python manage.py startapp %s" % (
                 self.path, "venv", app_name))
